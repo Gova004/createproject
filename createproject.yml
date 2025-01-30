@@ -9,11 +9,11 @@
         headers:
           Authorization: "Bearer ZhtfS0YyN5zzKMCQXdtvLua8JiV9hA"  # Replace with your API token
         body:
-          name: "CreateProject"  # Name of the project
-          description: "Project using the Gova004/createproject Git repository"
+          name: "HelloworldProject"  # Name of the project
+          description: "Project using the Gova004/helloworld Git repository"
           scm_type: "git"
-          scm_url: "https://github.com/Gova004/createproject.git"  # Provided Git repository URL
-          scm_branch: "main"  # Replace with the desired branch (if different)
+          scm_url: "https://github.com/Gova004/helloworld.git"  # The provided Git repository URL
+          scm_branch: "main"  # Replace with your desired branch (if different)
           scm_clean: true
           scm_delete_on_update: false
           scm_update_on_launch: true
@@ -22,7 +22,7 @@
 
     - name: Verify Project creation
       uri:
-        url: "http://192.168.49.2:32275/api/v2/projects/?name=CreateProject"
+        url: "http://192.168.49.2:32275/api/v2/projects/?name=HelloworldProject"
         method: GET
         headers:
           Authorization: "Bearer ZhtfS0YyN5zzKMCQXdtvLua8JiV9hA"
@@ -31,4 +31,3 @@
     - name: Print project creation response
       debug:
         msg: "{{ project_response.json }}"
-
