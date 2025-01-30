@@ -1,1 +1,34 @@
+- name: Create project in AWX using Git repository
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Create Project in AWX
+      uri:
+        url: "http://192.168.49.2:32275/api/v2/projects/"
+        method: POST
+        headers:
+          Authorization: "Bearer ZhtfS0YyN5zzKMCQXdtvLua8JiV9hA"  # Replace with your API token
+        body:
+          name: "CreateProject"  # Name of the project
+          description: "Project using the Gova004/createproject Git repository"
+          scm_type: "git"
+          scm_url: "https://github.com/Gova004/createproject.git"  # Provided Git repository URL
+          scm_branch: "main"  # Replace with the desired branch (if different)
+          scm_clean: true
+          scm_delete_on_update: false
+          scm_update_on_launch: true
+        body_format: json
+        status_code: 201  # Expect a successful creation (HTTP 201)
+
+    - name: Verify Project creation
+      uri:
+        url: "http://192.168.49.2:32275/api/v2/projects/?name=CreateProject"
+        method: GET
+        headers:
+          Authorization: "Bearer ZhtfS0YyN5zzKMCQXdtvLua8JiV9hA"
+        register: project_response
+
+    - name: Print project creation response
+      debug:
+        msg: "{{ project_response.json }}"
 
