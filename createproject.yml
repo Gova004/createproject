@@ -5,7 +5,7 @@
   tasks:
     - name: Create project in AWX
       uri:
-        url: "https://your-awx-server/api/v2/projects/"
+        url: "http://192.168.49.2:32275/api/v2/projects/"
         method: POST
         headers:
           Authorization: "Bearer ZhtfS0YyN5zzKMCQXdtvLua8JiV9hA"
@@ -13,7 +13,7 @@
           name: "helloworld_project"
           description: "This is a project created from the helloworld repository"
           scm_type: "git"
-          scm_url: "https://github.com/Gova004/helloworld.git"  # Using the specified repository
+          scm_url: "https://github.com/Gova004/helloworld.git"
           scm_branch: "main"  # You can adjust this if you're using a different branch
         body_format: json
         return_content: yes
