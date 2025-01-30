@@ -1,33 +1,24 @@
-- name: Create project in AWX using Git repository
+---
+- name: Create Project in Ansible AWX
   hosts: localhost
   gather_facts: no
   tasks:
-    - name: Create Project in AWX
+    - name: Create project in AWX
       uri:
-        url: "http://192.168.49.2:32275/api/v2/projects/"
+        url: "https://your-awx-server/api/v2/projects/"
         method: POST
         headers:
-          Authorization: "Bearer ZhtfS0YyN5zzKMCQXdtvLua8JiV9hA"  # Replace with your API token
-        body:
-          name: "HelloworldProject"  # Name of the project
-          description: "Project using the Gova004/helloworld Git repository"
-          scm_type: "git"
-          scm_url: "https://github.com/Gova004/helloworld.git"  # The provided Git repository URL
-          scm_branch: "main"  # Replace with your desired branch (if different)
-          scm_clean: true
-          scm_delete_on_update: false
-          scm_update_on_launch: true
-        body_format: json
-        status_code: 201  # Expect a successful creation (HTTP 201)
-
-    - name: Verify Project creation
-      uri:
-        url: "http://192.168.49.2:32275/api/v2/projects/?name=HelloworldProject"
-        method: GET
-        headers:
           Authorization: "Bearer ZhtfS0YyN5zzKMCQXdtvLua8JiV9hA"
-        register: project_response
+        body:
+          name: "my_project"
+          description: "This is my project created via Ansible"
+          scm_type: "git"
+          scm_url: "https://github.com/your-repo/project.git"
+          scm_branch: "main"
+        body_format: json
+        return_content: yes
+      register: result
 
-    - name: Print project creation response
+    - name: Debug the result
       debug:
-        msg: "{{ project_response.json }}"
+        var: result
