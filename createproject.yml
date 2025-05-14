@@ -19,6 +19,6 @@
         return_content: yes
       register: result
 
-    - name: Debug the result
+    - name: Debug the aaaa result
       debug:
         var: result
